@@ -1,0 +1,33 @@
+<%= form_with model: @teacher do |form| %>
+<div>
+<%= form.label :name %>
+<%= form.text_field :name %>
+</div>
+<h1>Add Students</h1>
+ <%= form.fields_for :student_teachers do |student_teachers_form|  %>
+  <div class="field">
+    <% Student.all.each do |student| %>
+      <div class="checkbox">
+        <%= check_box_tag 'teacher[student_teachers_attributes][][student_id]', student.id, @teacher.students.include?(student), id: "student_#{student.id}" %>
+        <%= label_tag "teacher_#{student.id}", student.name %>
+      </div>
+    <% end %>
+  </div> 
+<%end%> 
+
+<h1>Add Courses</h1>
+ <%= form.fields_for :teacher_courses do |teacher_courses_form|  %>
+  <div class="field">
+    <% Course.all.each do |course| %>
+      <div class="checkbox">
+        <%= check_box_tag 'teacher[teacher_courses_attributes][][course_id]', course.id, @teacher.courses.include?(course), id: "course_#{course.id}" %>
+        <%= label_tag "course_#{course.id}", course.name %>
+      </div>
+    <% end %>
+  </div> 
+<%end%> 
+<div>
+<div>
+<%= form.submit%>
+</div>
+<%end%>

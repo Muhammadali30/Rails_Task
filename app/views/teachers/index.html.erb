@@ -1,0 +1,30 @@
+<%= link_to "Show Students",students_path%>
+<%= link_to "Show Courses",courses_path%>
+<br><br><br>
+<%= link_to "Add new Teacher",new_teacher_path%>
+<table border=1>
+<thead>
+<tr>
+    <td>ID</td>
+    <td>name</td>
+    <td>Show</td>
+    <td>edit</td>
+    <td>Delete</td>
+</tr>
+</thead>
+<tbody>
+    <% @teachers.each do |teacher|%>
+    <tr>
+        <td><%= teacher.id%></td>
+        <td><%= teacher.name%></td>
+        <td><%= link_to "Show",teacher_path(teacher)%></td>
+        <td><%= link_to "Edit",edit_teacher_path(teacher)%></td>
+        <td><%= link_to "Delete",teacher_path(teacher),data: {
+            turbo_method: :delete
+        }%></td>
+
+
+    </tr>
+    <%end%>
+</tbody>
+</table>
